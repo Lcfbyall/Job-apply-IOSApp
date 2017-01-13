@@ -6,9 +6,5 @@ target 'YYxReceipt' do
   use_frameworks!
 
   # Pods for YYxReceipt
-pod 'SnapKit'
-pod 'EasyAnimation'
-pod 'AFDateHelper'
-pod 'Toaster', '~> 2.0'
-
+	
 end

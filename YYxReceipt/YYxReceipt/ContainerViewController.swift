@@ -9,18 +9,20 @@
 import UIKit
 import EasyAnimation
 import AFDateHelper
+import Alamofire
+import SwiftyJSON
+
 class ContainerViewController: UIViewController, SlidingContainerViewControllerDelegate{
     
     var slidingContainerViewController:SlidingContainerViewController!
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        // edit navigationController bar
         navigationController?.navigationBar.isHidden = true
         navigationController?.navigationBar.titleTextAttributes = [
             NSFontAttributeName: UIFont(name: "HelveticaNeue-Light", size: 20)!
         ]
-        
-    
     }
     
     override func viewDidAppear(_ animated: Bool) {

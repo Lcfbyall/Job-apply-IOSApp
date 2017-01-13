@@ -1,0 +1,30 @@
+{
+  "DVTSourceControlWorkspaceBlueprintPrimaryRemoteRepositoryKey" : "1E534DA094A5907C40346BD4B50D07D74447D73B",
+  "DVTSourceControlWorkspaceBlueprintWorkingCopyRepositoryLocationsKey" : {
+
+  },
+  "DVTSourceControlWorkspaceBlueprintWorkingCopyStatesKey" : {
+    "E4352ECC31754BCCBA72ABAF0227028EC18864C3" : 9223372036854775807,
+    "1E534DA094A5907C40346BD4B50D07D74447D73B" : 9223372036854775807
+  },
+  "DVTSourceControlWorkspaceBlueprintIdentifierKey" : "C78485A5-3FD5-4953-A419-853AD9F3D0A4",
+  "DVTSourceControlWorkspaceBlueprintWorkingCopyPathsKey" : {
+    "E4352ECC31754BCCBA72ABAF0227028EC18864C3" : "Job-apply-IOSApp\/YYxReceipt\/YYxReceipt\/",
+    "1E534DA094A5907C40346BD4B50D07D74447D73B" : "Job-apply-IOSApp\/"
+  },
+  "DVTSourceControlWorkspaceBlueprintNameKey" : "YYxReceipt",
+  "DVTSourceControlWorkspaceBlueprintVersion" : 204,
+  "DVTSourceControlWorkspaceBlueprintRelativePathToProjectKey" : "YYxReceipt\/YYxReceipt.xcworkspace",
+  "DVTSourceControlWorkspaceBlueprintRemoteRepositoriesKey" : [
+    {
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositoryURLKey" : "https:\/\/github.com\/YYxDeveloper\/Job-apply-IOSApp.git",
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositorySystemKey" : "com.apple.dt.Xcode.sourcecontrol.Git",
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositoryIdentifierKey" : "1E534DA094A5907C40346BD4B50D07D74447D73B"
+    },
+    {
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositoryURLKey" : "https:\/\/bitbucket.org\/YYxDeveloper\/yyxrecipt.git",
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositorySystemKey" : "com.apple.dt.Xcode.sourcecontrol.Git",
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositoryIdentifierKey" : "E4352ECC31754BCCBA72ABAF0227028EC18864C3"
+    }
+  ]
+}

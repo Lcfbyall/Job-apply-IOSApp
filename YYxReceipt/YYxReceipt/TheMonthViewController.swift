@@ -18,10 +18,7 @@ class theMonthViewController: UIViewController,UITableViewDelegate,UITableViewDa
     let bigContainerView_Width = 320
     let bigContainerView_Height = 450
     let bigContainerView_Height_Iphone5_Height = 350
-    
-    let displayLabelWidth = 200
-    let displayLabelWidth_Iphoe5 = 180
-    
+    let displayLabelWidth_Iphoe5 = 200
     let tagComplementaryNum = 100 //按鈕補數
     var witchPage:Int?{
         didSet {
@@ -39,8 +36,10 @@ class theMonthViewController: UIViewController,UITableViewDelegate,UITableViewDa
     
     let todayDate = Date()
     var year = Date().year()
+    var monthsNum = (Int(),Int())
+    let evenMonth = Int()
     
-    var monthsNum:(Int, Int) = (0,0)
+    
     
     
     
@@ -71,41 +70,25 @@ class theMonthViewController: UIViewController,UITableViewDelegate,UITableViewDa
     
        override func viewDidLoad() {
         
-        let fileNameStr = "\(year).\(monthsNum.0)\(monthsNum.1)"
-        receiptSaveFile_Arr = YYxSimpleFactory_ObjC.readFromPlist(withArray: fileNameStr) as AnyObject as! [Int]
-        print(receiptSaveFile_Arr)
-        displayLabel.font = UIFont.systemFont(ofSize: 100)
-        displayLabel.textColor = UIColor(red: 1, green: 0.8431, blue: 0, alpha: 1.0) /* #ffd700 */
-        
-        restoreButton.setImage(UIImage.init(named: "restore"), for: UIControlState.normal)
-//        restoreButton.imageView?.contentMode = .scaleAspectFit
-        restoreButton.backgroundColor = .orange
-        restoreButton.layer.borderColor = UIColor.black.cgColor
-        restoreButton.layer.borderWidth = 1
-        restoreButton.addTarget(self, action: #selector(restore), for: .touchUpInside)
-        
-        upButton.setImage(UIImage.init(named: "list"), for: UIControlState.normal)
-        upButton.backgroundColor = .orange
-        upButton.layer.borderColor = UIColor.black.cgColor
-        upButton.layer.borderWidth = 1
-        upButton.addTarget(self, action: #selector(openListTable), for: .touchUpInside)
-        
-        downButton.setImage(UIImage.init(named: "direction"), for: UIControlState.normal)
-       
-        downButton.backgroundColor = .orange
-        downButton.layer.borderColor = UIColor.black.cgColor
-        downButton.layer.borderWidth = 1
-        displayLabel.textAlignment = .center
-        displayLabel.text = ""
-        
-        smallContainerView.addSubview(upButton)
-        smallContainerView.addSubview(downButton)
-        smallContainerView.addSubview(restoreButton)
-
         self.checkUserDefaultFileExit()
+       
+        self.checkTimeToConnectSevers()
+        
+        self.editSubViewSetting()
         self.editViewWithSnapkit()
         self.editNumberButton()
         self.editListView()
+        self.loadDatafromPlist()
+        
+        
+    }
+    override func viewDidAppear(_ animated: Bool) {
+        //read&check plist & put into receiptSaveFile_Arr
+//        print("ggggg\(year).\(monthsNum.0)\(monthsNum.1)")
+//        YYxSimpleFactory_ObjC.readFromPlist(withArray: "\(year).\(monthsNum.0)\(monthsNum.1)")
+
+    }
+    func loadDatafromPlist() {
         // 讀取lastNumList_arry
         let lastIndexFileNameStr = "lastNumList_\(self.year).\(self.monthsNum.0)\(self.monthsNum.1)"
         
@@ -116,16 +99,8 @@ class theMonthViewController: UIViewController,UITableViewDelegate,UITableViewDa
                 let btn = self.view.viewWithTag(btnTag+self.tagComplementaryNum) as! UIButton
                 btn.setTitleColor(UIColor(red: 1, green: 0.8431, blue: 0, alpha: 1.0) /* #ffd700 */, for: .normal)
             }
-
+            
         }
-       
-        
-        
-    }
-    override func viewDidAppear(_ animated: Bool) {
-        //read&check plist & put into receiptSaveFile_Arr
-//        print("ggggg\(year).\(monthsNum.0)\(monthsNum.1)")
-//        YYxSimpleFactory_ObjC.readFromPlist(withArray: "\(year).\(monthsNum.0)\(monthsNum.1)")
 
     }
     func restore()  {
@@ -233,9 +208,6 @@ class theMonthViewController: UIViewController,UITableViewDelegate,UITableViewDa
         }
        
         
-
-       
-        
     }
     @objc fileprivate func delet(){
         displayLabel.text = ""
@@ -256,7 +228,7 @@ class theMonthViewController: UIViewController,UITableViewDelegate,UITableViewDa
             //creat file name of date
             let fileNameStr = "\(year).\(monthsNum.0)\(monthsNum.1)"
            
-            //
+            /* 假如第一位是0則存檔時會自動被忽略掉*/
             //save file in plist
             YYxSimpleFactory_ObjC.saveToPlist(with:yyxConvertToNSMutableArray(theArr: receiptSaveFile_Arr) , plistName: fileNameStr)
              print("後三碼資料array \(fileNameStr) = \(receiptSaveFile_Arr)")
@@ -267,6 +239,7 @@ class theMonthViewController: UIViewController,UITableViewDelegate,UITableViewDa
             //read old last index num array
             let readOldArray = YYxSimpleFactory_ObjC.readFromPlist(withArray: lastIndexFileNameStr) as AnyObject as! [Int]
             lastIndexList_Arr = readOldArray
+            
             //check repeat: use set
             lastIndexList_Arr += [Int(offsetString)!]
             lastIndexList_Arr = Array(Set(lastIndexList_Arr))
@@ -286,14 +259,14 @@ class theMonthViewController: UIViewController,UITableViewDelegate,UITableViewDa
             
 //             text color 歸零
                     for tag in 1...9 {
-                        print("xxx\(tag+tagComplementaryNum)")
+//                        print("xxx\(tag+tagComplementaryNum)")
                         let theTagView = self.view.viewWithTag(tag+tagComplementaryNum)as! UIButton
                         theTagView.setTitleColor(.black, for: .normal)
                     }
             
                     //重灌鍵盤 text color
                     for tag in lastIndexList_Arr {
-                        print("xxx\(tag+tagComplementaryNum)")
+//                        print("xxx\(tag+tagComplementaryNum)")
                         let theTagView = self.view.viewWithTag(tag+tagComplementaryNum)as! UIButton
                         theTagView.setTitleColor(UIColor(red: 1, green: 0.8431, blue: 0, alpha: 1.0) /* #ffd700 */, for: .normal)
                     }
@@ -336,7 +309,41 @@ class theMonthViewController: UIViewController,UITableViewDelegate,UITableViewDa
         
     }
 
+    func editSubViewSetting() {
+        let fileNameStr = "\(year).\(monthsNum.0)\(monthsNum.1)"
+        receiptSaveFile_Arr = YYxSimpleFactory_ObjC.readFromPlist(withArray: fileNameStr) as AnyObject as! [Int]
+        print("tt readFromPlist \(fileNameStr)=\(receiptSaveFile_Arr)")
+        
+        
+        displayLabel.font = UIFont.systemFont(ofSize: 100)
+        displayLabel.textColor = UIColor(red: 1, green: 0.8431, blue: 0, alpha: 1.0) /* #ffd700 */
+        
+        restoreButton.setImage(UIImage.init(named: "restore"), for: UIControlState.normal)
+        //        restoreButton.imageView?.contentMode = .scaleAspectFit
+        restoreButton.backgroundColor = .orange
+        restoreButton.layer.borderColor = UIColor.black.cgColor
+        restoreButton.layer.borderWidth = 1
+        restoreButton.addTarget(self, action: #selector(restore), for: .touchUpInside)
+        
+        upButton.setImage(UIImage.init(named: "list"), for: UIControlState.normal)
+        upButton.backgroundColor = .orange
+        upButton.layer.borderColor = UIColor.black.cgColor
+        upButton.layer.borderWidth = 1
+        upButton.addTarget(self, action: #selector(openListTable), for: .touchUpInside)
+        
+        downButton.setImage(UIImage.init(named: "direction"), for: UIControlState.normal)
+        
+        downButton.backgroundColor = .orange
+        downButton.layer.borderColor = UIColor.black.cgColor
+        downButton.layer.borderWidth = 1
+        displayLabel.textAlignment = .center
+        displayLabel.text = ""
+        
+        smallContainerView.addSubview(upButton)
+        smallContainerView.addSubview(downButton)
+        smallContainerView.addSubview(restoreButton)
 
+    }
     func editViewWithSnapkit(){
         self.view.addSubview(self.bigContainerView)
         self.view.addSubview(self.displayLabel)
@@ -390,7 +397,9 @@ class theMonthViewController: UIViewController,UITableViewDelegate,UITableViewDa
         
         if (userDefault.dictionary(forKey: "pageSetting_Dic") == nil) {
             pageSetting_Dic["smallContainerView_position"] = "left"
-            print("left")
+            pageSetting_Dic["seversWasLoaded"] = false
+            print("userDefault pageSetting_Dic init")
+            save_UserDefaultInDictionary(theDic: pageSetting_Dic, theDicName: "pageSetting_Dic")
             
         }else{
             
@@ -406,6 +415,7 @@ class theMonthViewController: UIViewController,UITableViewDelegate,UITableViewDa
         case 1,2:
             if self.witchPage == 1 {
                 monthsNum = (1,2)
+                
             }
             if self.witchPage == 2 {
                 monthsNum = (11,12)
@@ -489,7 +499,14 @@ class theMonthViewController: UIViewController,UITableViewDelegate,UITableViewDa
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = UITableViewCell.init(style: UITableViewCellStyle.default, reuseIdentifier: "cell")
        
-        cell.textLabel?.text = String(receiptSaveFile_Arr[indexPath.row])
+        var theString = String(receiptSaveFile_Arr[indexPath.row])
+        
+        //補上第一位的0
+        if theString.characters.count != 3 {
+            theString = "0"+theString
+        }
+        
+        cell.textLabel?.text = theString
         cell.textLabel?.textAlignment = .center
         return cell
     }
