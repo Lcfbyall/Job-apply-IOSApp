@@ -6,5 +6,10 @@ target 'YYxReceipt' do
   use_frameworks!
 
   # Pods for YYxReceipt
-	
+	pod 'SnapKit'
+	pod 'EasyAnimation'
+	pod 'AFDateHelper'
+	pod 'Toaster', '~> 2.0'
+	pod 'Alamofire', '~> 4.0'
+	pod 'SwiftyJSON'
 end
