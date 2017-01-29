@@ -1,5 +1,4 @@
 ## Job-apply-IOSApp
-========
 
 [![Swift](https://img.shields.io/badge/Swift-3.0-orange.svg)](https://swift.org)
 [![Platform](https://img.shields.io/badge/Platform-iOS-lightgrey.svg)](https://github.com/omaralbeik/swifterSwift)
